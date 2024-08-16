@@ -85,7 +85,7 @@ func (ac *AdminAuthController) AddAdminUsers(c *gin.Context) {
 	}
 	passwordSet, errBc := bcrypt.GenerateFromPassword([]byte(createUserBody.Password), 12)
 	if errBc != nil {
-		log.Fatal(errBc)
+		log.Printf("%v", errBc)
 		c.JSON(500, gin.H{
 			"message": errBc.Error(),
 		})
@@ -99,7 +99,7 @@ func (ac *AdminAuthController) AddAdminUsers(c *gin.Context) {
 	collection := ac.DbConn.Db.Collection("admin_users")
 	_, errMg := collection.InsertOne(context.TODO(), user)
 	if errMg != nil {
-		log.Fatal(errMg)
+		log.Printf("%v", errMg)
 		c.JSON(500, gin.H{
 			"message": errMg.Error(),
 		})
