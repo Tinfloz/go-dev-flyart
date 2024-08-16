@@ -86,3 +86,30 @@ func (pc *ProductController) CreateNewDrawing(c *gin.Context) {
 		"message": "Painting uploaded!",
 	})
 }
+
+func (pc *ProductController) GetAllProducts(c *gin.Context) {
+	collection := pc.DbConn.Db.Collection("products")
+	cursor, err := collection.Find(context.TODO(), bson.D{{}})
+	if err != nil {
+		c.JSON(404, gin.H{
+			"message": err.Error(),
+		})
+		return
+	}
+	defer cursor.Close(context.TODO())
+	var results []bson.M
+	for cursor.Next(context.TODO()) {
+		var result bson.M
+		errCursor := cursor.Decode(&result)
+		if errCursor != nil {
+			c.JSON(500, gin.H{
+				"message": errCursor.Error(),
+			})
+			return
+		}
+		results = append(results, result)
+	}
+	c.JSON(200, gin.H{
+		"results": results,
+	})
+}

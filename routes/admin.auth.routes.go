@@ -22,5 +22,6 @@ func SetUpRoutes(r *gin.Engine, dbConn *structs.DbConn) {
 	productRoutes := productApi.Group("/product")
 	{
 		productRoutes.POST("/create", authMiddleware, middlewares.CheckAdminStatus(), productController.CreateNewDrawing)
+		productRoutes.GET("/get", productController.GetAllProducts)
 	}
 }
