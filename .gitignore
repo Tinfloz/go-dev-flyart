@@ -1,0 +1,48 @@
+# Go build artifacts
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+
+# Go workspace files
+go.sum
+go.mod
+
+# IDE or editor specific files
+*.vscode/
+.idea/
+*.suo
+*.user
+*.userosscache
+*.sln
+*.swp
+*.swo
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Dependency directories
+vendor/
+
+# Other temporary files
+*.tmp
+*.log
+*.cache
+*.backup
+*.bak
+*.orig
+*.swp
+*.swo
+*.pid
+*.pid.lock
+
+# Environment files
+.env
+.env.*.local
+
+# Build directory (if using custom build directories)
+build/
+dist/
